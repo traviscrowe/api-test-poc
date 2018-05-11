@@ -1,0 +1,171 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: api-test-poc
+host: localhost:10010
+basePath: /
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json; charset=utf-8
+paths:
+  /hello:
+    x-swagger-router-controller: hello_world
+    get:
+      description: Returns 'Hello' to the caller
+      operationId: hello
+      parameters:
+        - name: name
+          in: query
+          description: The name of the person to whom to say hello
+          required: false
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/HelloWorldResponse"
+  /cars:
+    x-swagger-router-controller: cars
+    get:
+      description: Returns a list of all cars.
+      operationId: list
+      responses:
+        '200':
+          description: Success
+          schema: 
+            $ref: "#/definitions/CarList"
+    post:
+      description: Saves a new car.
+      operationId: create
+      parameters:
+        - in: body
+          name: car
+          description: The car to create.
+          schema:
+            $ref: '#/definitions/CarRequest'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CarResponse'
+  /cars/{id}:
+    x-swagger-router-controller: cars
+    get:
+      description: Returns a car by id.
+      operationId: get
+      parameters:
+        - in: path
+          name: id
+          description: The id of the car to get.
+          type: string
+          required: true
+          x-example: 'id'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CarResponse'
+    put:
+      description: Updates a car by id.
+      operationId: put
+      parameters:
+        - in: path
+          name: id
+          description: The id of the car to update.
+          type: string
+          required: true
+          x-example: 'id'
+        - in: body
+          name: car
+          description: The new value of car.
+          schema:
+            $ref: '#/definitions/CarRequest'
+      responses:
+        '200':
+          description: Success
+          schema:
+            properties:
+              updated:
+                type: boolean
+    delete:
+      description: Deletes a car by id.
+      operationId: delete
+      parameters:
+        - in: path
+          name: id
+          description: The id of the car to delete.
+          type: string
+          required: true
+          x-example: 'id'
+      responses:
+        '200':
+          description: Success
+          schema:
+            properties:
+              updated:
+                type: boolean
+  /swagger:
+    x-swagger-pipe: swagger_raw
+definitions:
+  HelloWorldResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  CarRequest:
+    required:
+      - year
+      - make
+      - model
+      - color
+      - mileage
+    properties:
+      year:
+        type: string
+      make:
+        type: string
+      model:
+        type: string
+      color:
+        $ref: '#/definitions/Color'
+      mileage:
+        type: number
+  CarResponse:
+    required:
+      - year
+      - make
+      - model
+      - color
+      - mileage
+    properties:
+      _id:
+        type: string
+      year:
+        type: string
+      make:
+        type: string
+      model:
+        type: string
+      color:
+        $ref: '#/definitions/Color'
+      mileage:
+        type: number
+  CarList:
+    required:
+      - items
+    properties:
+      items:
+        $ref: '#/definitions/CarResponse'
+  Color:
+    required:
+      - primary
+      - secondary
+    properties:
+      primary:
+        type: string
+      secondary:
+        type: string
