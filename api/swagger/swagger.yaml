@@ -23,7 +23,7 @@ paths:
           required: false
           type: string
       responses:
-        "200":
+        '200':
           description: Success
           schema:
             $ref: "#/definitions/HelloWorldResponse"
@@ -68,6 +68,10 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/CarResponse'
+        '404':
+          description: Not Found
+          schema:
+            type: object
     put:
       description: Updates a car by id.
       operationId: put
@@ -90,6 +94,10 @@ paths:
             properties:
               updated:
                 type: boolean
+        '404':
+          description: Not Found
+          schema:
+            type: object
     delete:
       description: Deletes a car by id.
       operationId: delete
@@ -105,8 +113,12 @@ paths:
           description: Success
           schema:
             properties:
-              updated:
+              deleted:
                 type: boolean
+        '404':
+          description: Not Found
+          schema:
+            type: object
   /swagger:
     x-swagger-pipe: swagger_raw
 definitions:

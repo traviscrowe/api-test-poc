@@ -2,23 +2,35 @@
   "name": "api-test-poc",
   "version": "0.0.1",
   "private": true,
-  "description": "New Swagger API Project",
+  "description": "A POC project to demonstrate swagger-first testing tools.",
   "keywords": [],
-  "author": "",
+  "author": "Travis Crowe",
   "license": "",
   "main": "app.js",
   "dependencies": {
     "express": "^4.12.3",
     "nedb": "^1.8.0",
-    "swagger-express-mw": "^0.1.0"
-  },
-  "devDependencies": {
+    "swagger-express-mw": "^0.1.0",
+    "swagger-test-templates": "^1.5.0",
+    "dredd": "^5.1.7",
+    "hippie-swagger": "^3.2.0",
+    "hooks": "^0.3.2",
     "should": "^7.1.0",
-    "supertest": "^1.0.0"
+    "supertest": "^1.0.0",
+    "swagger-parser": "^4.1.0",
+    "z-schema": "^3.12.0",
+    "request": "^2.58.0",
+    "chai": "^3.0.0",
+    "mocha": "^2.2.5",
+    "dotenv": "^1.2.0"
   },
   "scripts": {
-    "start": "node app.js",
-    "test": "swagger project test",
-    "test:dredd": "dredd"
+    "start": "swagger project start",
+    "start:edit": "swagger project edit",
+    "generate-tests": "node test/swagger-test-templates/generate.js",
+    "test:dredd": "dredd --config test/dredd/dredd.yml",
+    "test:stt": "mocha test/swagger-test-templates/test/*.js",
+    "test:hippie": "mocha test/hippie-swagger/index.js",
+    "test:all": "npm run test:dredd && npm run test:stt && npm test:hippie"
   }
 }

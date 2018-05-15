@@ -1,5 +1,5 @@
 dry-run: null
-hookfiles: 'test/hooks.js'
+hookfiles: 'test/dredd/hooks.js'
 language: nodejs
 sandbox: false
 server: swagger project start
