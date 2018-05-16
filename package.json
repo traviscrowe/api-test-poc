@@ -27,10 +27,9 @@
   "scripts": {
     "start": "swagger project start",
     "start:edit": "swagger project edit",
-    "generate-tests": "node test/swagger-test-templates/generate.js",
+    "generate-tests:stt": "node test/swagger-test-templates/generate.js",
     "test:dredd": "dredd --config test/dredd/dredd.yml",
     "test:stt": "mocha test/swagger-test-templates/test/*.js",
-    "test:hippie": "mocha test/hippie-swagger/index.js",
-    "test:all": "npm run test:dredd && npm run test:stt && npm test:hippie"
+    "test:hippie": "mocha test/hippie-swagger/index.js"
   }
 }
